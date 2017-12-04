@@ -48,13 +48,9 @@ app.config(function($routeProvider){
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
         })
-        .when("/contacts/home", {
-            templateUrl: 'partials/contacts/view.html',
+        .when("/home", {
+            templateUrl: 'partials/home.html',
             controller: 'HomeCtrl'
         })
-        // .when("/contacts/edit/:id", {
-        //     templateUrl: 'partials/contacts/edit.html',
-        //     controller: 'EditCtrl'
-        // })
         .otherwise("/home");
 }); 
