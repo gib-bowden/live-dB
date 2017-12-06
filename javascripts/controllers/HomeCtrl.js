@@ -1,80 +1,22 @@
 "use strict";
 
-app.controller("HomeCtrl", function($location, $rootScope, $scope, AuthService){
+app.controller("HomeCtrl", function($window, $location, $rootScope, $scope, AuthService, SpotifyService){
 
-    $scope.spotifyLogin = () => {
-        AuthService.spotifyLogin().then((results) => {
-            console.log(results);
-        }).catch((err) => {
-            console.log(err);
-        });
-    };
+    // $scope.spotifyLogin = () => {
+    //     SpotifyService.getSpotifyAuthRequest().then((results) => {
+    //       console.log(results); 
+    //         $window.location.assign(`https://accounts.spotify.com/authorize?${results.data}`)
+    //     }).catch((err) => {
+    //         console.log("err from spotifyLogin", err);
+    //     });
+    // };
 
-      function getHashParams() {
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        while ( e = r.exec(q)) {
-           hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
-        return hashParams;
-      }
+    $scope.authenticateSpotify = () => {
+      SpotifyService.authenticate().then((results) => {
+          console.log(results); 
+          //authenticateFirebase(results.email, results.password)
+      });
+  };
 
-      var userProfileSource = document.getElementById('user-profile-template').innerHTML,
-          userProfileTemplate = Handlebars.compile(userProfileSource),
-          userProfilePlaceholder = document.getElementById('user-profile');
-
-      var oauthSource = document.getElementById('oauth-template').innerHTML,
-          oauthTemplate = Handlebars.compile(oauthSource),
-          oauthPlaceholder = document.getElementById('oauth');
-
-      var params = getHashParams();
-
-      var access_token = params.access_token,
-          refresh_token = params.refresh_token,
-          error = params.error;
-
-      if (error) {
-        window.alert('There was an error during the authentication');
-      } else {
-        if (access_token) {
-          // render oauth info
-          oauthPlaceholder.innerHTML = oauthTemplate({
-            access_token: access_token,
-            refresh_token: refresh_token
-          });
-
-          $.ajax({
-              url: 'https://api.spotify.com/v1/me',
-              headers: {
-                'Authorization': 'Bearer ' + access_token
-              },
-              success: function(response) {
-                userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-
-                $('#login').hide();
-                $('#loggedin').show();
-              }
-          });
-        } else {
-            // render initial screen
-            $('#login').show();
-            $('#loggedin').hide();
-        }
-
-        document.getElementById('obtain-new-token').addEventListener('click', function() {
-          $.ajax({
-            url: 'localhost:8888/refresh_token',
-            data: {
-              'refresh_token': refresh_token
-            }
-          }).done(function(data) {
-            access_token = data.access_token;
-            oauthPlaceholder.innerHTML = oauthTemplate({
-              access_token: access_token,
-              refresh_token: refresh_token
-            });
-          });
-        }, false);
-      }
+      
 }); 

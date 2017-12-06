@@ -2,20 +2,20 @@
 
 app.service("AuthService", function($q, $http){
 
-    const spotifyLoginOptions = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            origin: '*'
-        }
+    // const authenticateGoogle = () => {
+    //     const provider = new firebase.auth.GoogleAuthProvider();
+    //     return firebase.auth().signInWithPopup(provider);
+    // };
+
+
+    const createUser = (email, password) => {
+        return firebase.auth().createUserWithEmailAndPassword(email, password); 
     };
 
-
-
-    const authenticateGoogle = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        return firebase.auth().signInWithPopup(provider);
+    const authenticateUserToFirebase = (email, password) => {
+        return firebase.auth().signInWithEmailAndPassword(email, password);
     };
+
 
     const isAuthenticated = () => {
         return firebase.auth().currentUser ? true : false;
@@ -26,16 +26,9 @@ app.service("AuthService", function($q, $http){
      };
 
 
-     const spotifyLogin = () => {
-        return $q((resolve, reject) => {
-            $http.get('http://localhost:8888/login', spotifyLoginOptions).then((results) => {
-                 resolve(results); 
-            }).catch((err) => {
-                console.log(err);
-            });
-        });
-    };   
 
-    return {spotifyLogin, authenticateGoogle, isAuthenticated, logout}; 
+
+    return {authenticateUserToFirebase, createUser, isAuthenticated, logout}; 
 });
 
+ 
