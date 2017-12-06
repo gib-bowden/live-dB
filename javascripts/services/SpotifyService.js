@@ -6,7 +6,7 @@ app.service("SpotifyService", function($q, $http){
         return $q((resolve, reject) => {
             $http.get('https://mighty-shelf-28254.herokuapp.com/login').then((results) => {
                 console.log("results from /login", results); 
-                return sendAuthenticationData(results.data);
+                resolve(); 
             }).then((data) => {
                 console.log("results from /authorize", data);
             }).catch((err) => {
