@@ -42,7 +42,7 @@ app.run(function($location, $rootScope, FIREBASE_CONFIG, AuthService){
 
 }); 
 
-app.config(function($routeProvider){
+app.config(function($routeProvider, $locationProvider){
     $routeProvider
         .when("/login", {
             templateUrl: 'partials/login.html',
@@ -52,5 +52,14 @@ app.config(function($routeProvider){
             templateUrl: 'partials/home.html',
             controller: 'HomeCtrl'
         })
-        .otherwise("/home");
+        .when("/success", {
+            templateUrl: 'partials/redirect.html',
+            controller: 'RedirectCtrl'
+        })
+        .otherwise("/success"); 
+
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+          });
 }); 

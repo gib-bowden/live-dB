@@ -21,14 +21,14 @@
                     </div>
             </form>
             <li><a ng-controller="ModalCtrl" ng-click="launchModal('partials/contacts/new.html','NewCtrl')">Add Contact</a></li>
-            <li><a ng-click="toggleView()" ng-if="!favoritesView" ng-href="#!/contacts/favorites">View Favorites</a></li>
-            <li><a ng-click="toggleView()" ng-if="favoritesView" ng-href="#!/contacts/view">View All</a></li>
+            <li><a ng-click="toggleView()" ng-if="!favoritesView" ng-href="/contacts/favorites">View Favorites</a></li>
+            <li><a ng-click="toggleView()" ng-if="favoritesView" ng-href="/contacts/view">View All</a></li>
             <li><a ng-click="logoutUser()">Logout</a></li>
         </ul>
 
         <!-- Nav options that show when user is NOT authenticated (no UID) -->
         <ul class="nav navbar-nav navbar-right" ng-show="!uid">
-            <li><a ng-href="#!/login">Login</a></li>
+            <li><a ng-href="/login">Login</a></li>
         </ul>
 
         </div><!-- /.navbar-collapse -->
