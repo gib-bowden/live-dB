@@ -42,19 +42,27 @@ app.run(function($location, $rootScope, FIREBASE_CONFIG, AuthService){
 
 }); 
 
-app.config(function($routeProvider){
+app.config(function($routeProvider, $locationProvider){
     $routeProvider
         .when("/login", {
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
         })
-        .when("/contacts/home", {
-            templateUrl: 'partials/contacts/view.html',
+        .when("/home", {
+            templateUrl: 'partials/home.html',
             controller: 'HomeCtrl'
         })
-        // .when("/contacts/edit/:id", {
-        //     templateUrl: 'partials/contacts/edit.html',
-        //     controller: 'EditCtrl'
+        // .when("/", {
+        //     templateUrl: 'partials/redirect.html',
+        //     controller: 'RedirectCtrl'
         // })
-        .otherwise("/home");
+        .when("/search", {
+            templateUrl: 'partials/search.html',
+            controller: 'SearchCtrl'
+        })
+
+        // $locationProvider.html5Mode({
+        //     enabled: false,
+        //     requireBase: true
+        //   });
 }); 

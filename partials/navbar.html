@@ -8,21 +8,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Contacts App</a>
+        <a class="navbar-brand" href="#">Live Db</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <!-- Nav options that show when user is authenticated (has a UID) -->
         <ul class="nav navbar-nav navbar-right" ng-show="uid">
-            <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input ng-model="searchTextNav.text" type="text" class="form-control" placeholder="Search Contacts">
-                    </div>
-            </form>
-            <li><a ng-controller="ModalCtrl" ng-click="launchModal('partials/contacts/new.html','NewCtrl')">Add Contact</a></li>
-            <li><a ng-click="toggleView()" ng-if="!favoritesView" ng-href="#!/contacts/favorites">View Favorites</a></li>
-            <li><a ng-click="toggleView()" ng-if="favoritesView" ng-href="#!/contacts/view">View All</a></li>
+            <li><a ng-href="#!/search">Search</a></li>
             <li><a ng-click="logoutUser()">Logout</a></li>
         </ul>
 
