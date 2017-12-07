@@ -1,6 +1,6 @@
 "use strict"; 
 
-app.controller("NavCtrl", function($location, $rootScope, $scope, $window, AuthService, CityService, ShowService){
+app.controller("NavCtrl", function($location, $rootScope, $scope, $window, AuthService){
 
     $scope.logoutUser = () => {
         delete $rootScope.uid; 
@@ -14,16 +14,4 @@ app.controller("NavCtrl", function($location, $rootScope, $scope, $window, AuthS
         text: ""
     };  
 
-        //TEST CALL USING Youi Zouma
-        ShowService.getArtistShows("Oasis").then((data) => {
-            console.log(data); 
-        }).catch((error) => {
-            console.log(error);
-        });
-
-        CityService.getCityPredictions("Nashv").then((data) => {
-            console.log(data);
-        }).catch((err) =>{
-            console.log(err);
-        });
 });

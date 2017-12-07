@@ -52,11 +52,14 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: 'partials/home.html',
             controller: 'HomeCtrl'
         })
-        .when("/:success", {
-            templateUrl: 'partials/redirect.html',
-            controller: 'RedirectCtrl'
+        // .when("/", {
+        //     templateUrl: 'partials/redirect.html',
+        //     controller: 'RedirectCtrl'
+        // })
+        .when("/search", {
+            templateUrl: 'partials/search.html',
+            controller: 'SearchCtrl'
         })
- 
 
         // $locationProvider.html5Mode({
         //     enabled: false,
