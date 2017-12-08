@@ -15,16 +15,22 @@ app.service("SongKickService", function($http, $q, moment, SONGKICK_KEY){
     };
 
     const getConcertsByArtistId = (artistId, startDate, endDate, pageNumber) => {
-        let pageNumberFilter = (pageNumber) ? `&page=${pageNumber}` : ""; 
-        let startDateFilter = (startDate) ? `&min_date=${moment(startDate).format('YYYY[-]MM[-]DD')}` : ""; 
-        let endDateFilter = (endDate) ? `&max_date=${moment(endDate).format('YYYY[-]MM[-]DD')}` : ""; 
-        return $q((resolve, reject) => {
-            $http.get(`http://api.songkick.com/api/3.0/artists/${artistId}/calendar.json?apikey=${SONGKICK_KEY}${startDateFilter}${endDateFilter}${pageNumberFilter}`).then((results) => {
-                resolve(results.data.resultsPage.results.event);
-            }).catch((error) => {
-                reject(error); 
+        if (artistId) {
+            let pageNumberFilter = (pageNumber) ? `&page=${pageNumber}` : ""; 
+            let startDateFilter = (startDate) ? `&min_date=${moment(startDate).format('YYYY[-]MM[-]DD')}` : ""; 
+            let endDateFilter = (endDate) ? `&max_date=${moment(endDate).format('YYYY[-]MM[-]DD')}` : ""; 
+            return $q((resolve, reject) => {
+                $http.get(`http://api.songkick.com/api/3.0/artists/${artistId}/calendar.json?apikey=${SONGKICK_KEY}${startDateFilter}${endDateFilter}${pageNumberFilter}`).then((results) => {
+                let concerts = results.data.resultsPage.results.event
+                concerts.forEach((concert) => {
+                    concert.queriedArtistId = artistId; 
+                });
+                resolve(concerts);
+                }).catch((error) => {
+                    reject(error); 
+                });
             });
-        });
+        }
     };
 
 
