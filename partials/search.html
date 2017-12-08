@@ -1,18 +1,22 @@
-<div class="text-center" id="search">
-        <h1>Search Artist</h1>
-        <div class="input-group col-xs-6 col-xs-offset-3">
-                <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1"></span>
-                <input ng-keypress="enterPushArtistSearch($event)" type="text" class="form-control" placeholder="Search for an artist" aria-describedby="basic-addon1">
+<div class="text-center" id="search">            
+    <form name="searchForm" ng-submit="search(query)" novalidate>
+        <div class="form-group col-sm-6">
+            <input ng-model="query.artist" ng-required="!query.city" type="input" class="form-control" id="inputArtist" aria-describedby="artist" placeholder="Search for an Artist">
+        </div>            
+        <div class="form-group col-sm-6">
+            <input ng-model="query.city" ng-required="!query.artist" type="input" class="form-control" id="inputCity" aria-describedby="city" placeholder="Search for a City">
+        </div> 
+        <div class="form-group col-sm-6">
+            <input ng-model="query.startDate" type="date" class="form-control" id="inputPhone" aria-describedby="phone" placeholder="Phone Number">
+        </div>  
+        <div class="form-group col-sm-6">
+            <input ng-model="query.endDate" email type="date" class="form-control" id="inputEmail" aria-describedby="email" placeholder="Email">
         </div>
-        <!-- <div id="movies">
-            <div ng-repeat="movie in movies" class="col-sm-6 col-md-4 movie">
-                <div class="thumbnail">
-                    <img class="poster-path" ng-src="{{image_url}}/w342/{{movie.poster_path}}" alt="poster">
-                    <div class="caption">
-                        <h3 class="title">{{movie.title}}</h3>
-                        <p class="overview">{{movie.overview}}</p>
-                        <p><a ng-click="saveRated(movie)" class="btn btn-primary review-btn" role="button">Review</a> <a ng-click="saveWishlist(movie)" class="btn btn-default wishlist-btn" role="button">Wishlist</a></p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
+    </form>
+    <div ng-if="concerts.length" id="results">
+        <ul id="results-list" class="list-group">
+            <li ng-repeat="concert in concerts"class="list-group-item">{{concert.displayName}} | {{concert.venue.displayName}} | {{concert.start.date}}</li>
+        </ul>
+    </div>
+</div>
