@@ -1,6 +1,6 @@
 "use strict"; 
 
-app.service("SongKickService", function($http, $q, SONGKICK_KEY){
+app.service("SongKickService", function($http, $q, moment, SONGKICK_KEY){
 
 //ARTISTS
 
@@ -16,8 +16,8 @@ app.service("SongKickService", function($http, $q, SONGKICK_KEY){
 
     const getConcertsByArtistId = (artistId, startDate, endDate, pageNumber) => {
         let pageNumberFilter = (pageNumber) ? `&page=${pageNumber}` : ""; 
-        let startDateFilter = (startDate) ? `&min_date=${startDate}` : ""; 
-        let endDateFilter = (endDate) ? `&max_date=${endDate}` : ""; 
+        let startDateFilter = (startDate) ? `&min_date=${moment(startDate).format('YYYY[-]MM[-]DD')}` : ""; 
+        let endDateFilter = (endDate) ? `&max_date=${moment(endDate).format('YYYY[-]MM[-]DD')}` : ""; 
         return $q((resolve, reject) => {
             $http.get(`http://api.songkick.com/api/3.0/artists/${artistId}/calendar.json?apikey=${SONGKICK_KEY}${startDateFilter}${endDateFilter}${pageNumberFilter}`).then((results) => {
                 resolve(results.data.resultsPage.results.event);
@@ -46,8 +46,8 @@ app.service("SongKickService", function($http, $q, SONGKICK_KEY){
 
     const getConcertsByMetroId = (metroId, startDate, endDate, pageNumber) => {
         let pageNumberFilter = (pageNumber) ? `&page=${pageNumber}` : ""; 
-        let startDateFilter = (startDate) ? `&min_date=${startDate}` : ""; 
-        let endDateFilter = (endDate) ? `&max_date=${endDate}` : ""; 
+        let startDateFilter = (startDate) ? `&min_date=${moment(startDate).format('YYYY[-]MM[-]DD')}` : ""; 
+        let endDateFilter = (endDate) ? `&max_date=${moment(endDate).format('YYYY[-]MM[-]DD')}` : ""; 
         return $q((resolve, reject) => {
             $http.get(`http://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${SONGKICK_KEY}${startDateFilter}${endDateFilter}${pageNumberFilter}`).then((results) => {
                 resolve(results.data.resultsPage.results.event);

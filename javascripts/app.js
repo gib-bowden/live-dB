@@ -2,4 +2,4 @@
 
 "use strict"; 
 
-const app = angular.module('live-dB', ["ngAnimate", "ngRoute", "ngSanitize", "ui.bootstrap"]); 
+const app = angular.module('live-dB', ["ngAnimate", "ngRoute", "ngSanitize", "ui.bootstrap", "angularMoment"]); 
