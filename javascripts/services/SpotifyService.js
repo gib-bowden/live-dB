@@ -34,9 +34,10 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
             localStorage.setItem('spotifyUserId', spotifyUserId);
             LoginService.addFirebaseUser(userData.email, userData.spotifyId).then((uid) => {
                 console.log(uid);
+                $rootScope.uid = uid; 
                 firebase.database().ref('userDetails/' + spotifyUserId).update({'uid': uid});
             })
-            $rootScope.$apply(() => {$location.path('/main')});         
+            $rootScope.$apply(() => {$location.path('/upcoming')});         
         }
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
