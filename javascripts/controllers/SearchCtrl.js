@@ -40,19 +40,26 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         });
     };
 
-    const matchQueriedArtist = (concert) => {
+    const getQueriedArtist = (concert) => {
         let artistMatch = concert.performance.filter((act) => {
             return act.artist.id === concert.queriedArtistId
         });
-        return artistMatch[0].displayName
+        return artistMatch[0];
+    }
+
+    const getHeadlinerForMetroQuery = (concert) => {
+        let headliner = concert.performance.filter((act) => {
+            return act.billing === "headline"
+        });
+        return headliner[0];
     }
 
     const buildSavableConcertObject = (concert) => {
         let savableConcertObject = {
             concertId: concert.id,
             concertName: concert.displayName,
-            artistName: (isArtistSearch) ? matchQueriedArtist(concert) : NEED, 
-            artistId: concert.queriedArtistId,
+            artistName: ($scope.isArtistSearch) ? getQueriedArtist(concert).displayName : getHeadlinerForMetroQuery(concert).displayName, 
+            artistId: ($scope.isArtistSearch) ? concert.queriedArtistId : getHeadlinerForMetroQuery(concert).id,
             city: concert.venue.metroArea.displayName,
             state: concert.venue.metroArea.state.displayName,
             venue: concert.venue.displayName,
@@ -70,8 +77,10 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
 
     $scope.search = (queryObject, pageNumber) => {
         if (queryObject.artist) {
+            $scope.isArtistSearch = true; 
             getArtistConcerts(queryObject.artist, queryObject.city, queryObject.startDate, queryObject.endDate, pageNumber)
         } else {
+            $scope.isArtistSearch = false; 
             getUsMetroConcerts(queryObject.city, queryObject.startDate, queryObject.endDate, pageNumber)
         }
     }; 
