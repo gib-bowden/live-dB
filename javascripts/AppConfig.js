@@ -60,6 +60,14 @@ app.config(function($routeProvider, $locationProvider){
             templateUrl: 'partials/search.html',
             controller: 'SearchCtrl'
         })
+        .when("/upcoming", {
+            templateUrl: 'partials/upcoming.html',
+            controller: 'UpcomingCtrl'
+        })
+        .when("/attended", {
+            templateUrl: 'partials/attended.html',
+            controller: 'AttendedCtrl'
+        })
 
         // $locationProvider.html5Mode({
         //     enabled: false,

@@ -16,7 +16,9 @@
     </form>
     <div ng-if="concerts.length" id="results">
         <ul id="results-list" class="list-group">
-            <li ng-repeat="concert in concerts"class="list-group-item">{{concert.displayName}} | {{concert.venue.displayName}} | {{concert.start.date}}</li>
+            <li ng-repeat="concert in concerts"class="list-group-item">{{concert.displayName}} | {{concert.venue.displayName}} | {{concert.start.date}}
+                <button class="btn btn-primary" ng-click="saveConcert(concert)">Save Show</button>
+            </li>
         </ul>
     </div>
 </div>

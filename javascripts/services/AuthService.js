@@ -2,11 +2,6 @@
 
 app.service("AuthService", function($q, $http){
 
-    // const authenticateGoogle = () => {
-    //     const provider = new firebase.auth.GoogleAuthProvider();
-    //     return firebase.auth().signInWithPopup(provider);
-    // };
-
 
     const createUser = (email, password) => {
         return firebase.auth().createUserWithEmailAndPassword(email, password); 
