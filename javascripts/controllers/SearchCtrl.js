@@ -67,7 +67,7 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             rating: null,
             notes: null,
             haveTix: null,
-            status: null,
+            status: "going",
             concertUri: concert.uri,
             uid: $rootScope.uid
         };

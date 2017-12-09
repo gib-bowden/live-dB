@@ -26,8 +26,8 @@ app.service("DatabaseService", function($q, $http, FIREBASE_CONFIG){
         return $http.delete(`${FIREBASE_CONFIG.databaseURL}/concerts/${concertId}.json`);
     };
 
-    const updateConcert = (concertId) => {
-        return $http.put(`${FIREBASE_CONFIG.databaseURL}/concerts/${concertId}.json`, JSON.stringify(concert));        
+    const updateConcert = (concert) => {
+        return $http.put(`${FIREBASE_CONFIG.databaseURL}/concerts/${concert.id}.json`, JSON.stringify(concert));        
     };
 
 

@@ -11,14 +11,14 @@ app.controller("LoginCtrl", function($location, $rootScope, $scope, AuthService)
                 $rootScope.uid = result.uid; 
                 console.log("new user created")
                 $scope.$apply(() => {
-                    $location.url("/home"); 
+                    $location.url("/upcoming"); 
                 });            
             }).catch((err) =>{
                 if (err.code === "auth/email-already-in-use") {
                     AuthService.authenticateUserToFirebase(email, password).then((result) => {
                         $rootScope.uid = result.uid;
                         $scope.$apply(() => {
-                            $location.url("/home"); 
+                            $location.url("/upcoming"); 
                         });
                     });
                 } else {
