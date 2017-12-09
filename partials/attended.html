@@ -1,0 +1,16 @@
+<div class="text-center" id="attended">         
+        <div ng-if="concerts.length" id="results">
+            <ul id="upcoming-list" class="list-group">
+                <li ng-repeat="concert in concerts"class="list-group-item col-xs-12">
+                    <div class="col-xs-3">{{concert.artistName}}</div>
+                    <div class="col-xs-3">{{concert.venue}}</div>
+                    <div class="col-xs-3">{{concert.datetime}}</div>
+                    <div class="col-xs-3">
+                        <button class="btn btn-default btn-sm col-xs-3 col-sm-offset-1" >Details</button>
+                        <button class="btn btn-primary btn-sm col-xs-3 col-sm-offset-1" ng-click="toggleStatus(concert)">{{concert.status}}</button>
+                        <button class="btn btn-danger btn-sm col-xs-3 col-sm-offset-1" ng-click="deleteConcert(concert)">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
