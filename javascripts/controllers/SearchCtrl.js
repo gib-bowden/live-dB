@@ -1,6 +1,6 @@
 "use strict"; 
 
-app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseService, SongKickService){
+app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseService, SongKickService, SpotifyService){
 
 
     const getArtistConcerts = (artist, city, startDate, endDate, pageNumber) => {
@@ -91,6 +91,13 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             console.log(result); 
         }).catch((err) => {
             console.log(err); 
+        });
+    };
+
+    $scope.getSpotifyMusic = () => {
+        SpotifyService.getSpotifyPlaylists().then((results) => {
+            console.log(results);
+            $scope.isSpotifySearch = true; 
         });
     };
 

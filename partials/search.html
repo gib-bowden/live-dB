@@ -14,6 +14,7 @@
         </div>
         <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
     </form>
+    <button ng-click="getSpotifyMusic()"class="btn btn-default spotify-btn">Import Spotify</button>
     <div ng-if="concerts.length" id="results">
         <ul id="results-list" class="list-group">
             <li ng-repeat="concert in concerts"class="list-group-item">{{concert.displayName}} | {{concert.venue.displayName}} | {{concert.start.date}}
