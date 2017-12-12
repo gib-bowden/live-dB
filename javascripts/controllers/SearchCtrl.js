@@ -5,12 +5,14 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
 
     const getArtistConcerts = (artist, city, startDate, endDate, pageNumber) => {
         SongKickService.getArtists(artist).then((results) => {
-            return SongKickService.getConcertsByArtistId(results[0].id, startDate, endDate, pageNumber)
+            if (results) {
+                return SongKickService.getConcertsByArtistId(results[0].id, startDate, endDate, pageNumber)
+            }            
         }).then((results) => {
-            if (city) {
+            if (city && results) {
                 console.log("getArtistConcerts(filtered)", filterArtistConcertsByCity(city, results));
                 $scope.concerts = filterArtistConcertsByCity(city, results);
-            } else {
+            } else if (results) {
                 console.log("getArtistConcerts", results); 
                 $scope.concerts = results;
             } 
@@ -21,7 +23,7 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
     
 
     const filterArtistConcertsByCity = (cityQuery, concertArr) => {
-        let regex = RegExp(`(${cityQuery})`, 'ixg');
+        let regex = RegExp(`(${cityQuery})`, 'ig');
         let localizedConcerts = concertArr.filter((concert) => {
             return regex.test(concert.location.city)
         })
@@ -94,11 +96,44 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         });
     };
 
-    $scope.getSpotifyMusic = () => {
+    $scope.getPlaylists = () => {
         SpotifyService.getSpotifyPlaylists().then((results) => {
-            console.log(results);
+            console.log(results.data.items);
+            $scope.playlists = results.data.items;
             $scope.isSpotifySearch = true; 
         });
+    };
+
+
+    $scope.getRecentlyPlayed = () => {
+        SpotifyService.getRecentlyPlayed().then((results) => {
+            console.log(results.data.items);
+            $scope.isSpotifySearch = true; 
+        });
+    };
+
+    $scope.searchPlaylist = (playlistUrl) => {
+        SpotifyService.getPlaylistTracks(playlistUrl).then((results) => {
+            console.log(results.data.items);
+            let tracks = results.data.items
+            let uniqueArtists = getUniqueArtists(tracks); 
+            uniqueArtists.forEach((artist) => {
+                if ($scope.query) {
+                    getArtistConcerts(artist, $scope.query.city, $scope.query.startDate, $scope.query.endDate);
+                } else {
+                    getArtistConcerts(artist);
+                }                
+            });                
+        });
+    };
+
+    const getUniqueArtists = (tracks) => {
+        let allArtists = [];
+        tracks.forEach((track) => {
+            allArtists.push(track.track.artists[0].name)
+        });
+        let uniqueArtist = [...new Set(allArtists)];
+        return uniqueArtist; 
     };
 
 

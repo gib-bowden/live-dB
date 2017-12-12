@@ -22,9 +22,11 @@ app.service("SongKickService", function($http, $q, moment, SONGKICK_KEY){
             return $q((resolve, reject) => {
                 $http.get(`https://api.songkick.com/api/3.0/artists/${artistId}/calendar.json?apikey=${SONGKICK_KEY}${startDateFilter}${endDateFilter}${pageNumberFilter}`).then((results) => {
                 let concerts = results.data.resultsPage.results.event
-                concerts.forEach((concert) => {
-                    concert.queriedArtistId = artistId; 
-                });
+                if (concerts) {
+                    concerts.forEach((concert) => {
+                        concert.queriedArtistId = artistId; 
+                    });
+                }
                 resolve(concerts);
                 }).catch((error) => {
                     reject(error); 

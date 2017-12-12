@@ -14,7 +14,16 @@
         </div>
         <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
     </form>
-    <button ng-click="getSpotifyMusic()"class="btn btn-default spotify-btn">Import Spotify</button>
+    <button ng-click="getRecentlyPlayed()" class="btn btn-default spotify-btn">Import Recently Played</button>
+    <button ng-click="getPlaylists()" class="btn btn-default spotify-btn">Import Playlists</button>
+    <div ng-if="playlists.length">
+        <ul id="results-list" class="list-group">
+            <li ng-repeat="playlist in playlists"class="list-group-item">{{playlist.name}}
+                <button class="btn btn-primary" ng-click="searchPlaylist(playlist.tracks.href)">Save Show</button>
+            </li>
+        </ul>
+    </div>
+
     <div ng-if="concerts.length" id="results">
         <ul id="results-list" class="list-group">
             <li ng-repeat="concert in concerts"class="list-group-item">{{concert.displayName}} | {{concert.venue.displayName}} | {{concert.start.date}}
