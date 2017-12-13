@@ -1,9 +1,5 @@
-/* #login, #loggedin {
-    display: none;
-  } */
-  .text-overflow {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 500px;
-  }
+#playlists .playlist .playlist-image {
+  height: 300px;
+  width: 300px;
+  margin-top: 5%;
+  cursor: pointer; }

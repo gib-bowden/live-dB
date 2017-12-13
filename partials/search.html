@@ -14,14 +14,13 @@
         </div>
         <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
     </form>
-    <button ng-click="getRecentlyPlayed()" class="btn btn-default spotify-btn">Import Recently Played</button>
-    <button ng-click="getPlaylists()" class="btn btn-default spotify-btn">Import Playlists</button>
-    <div ng-if="playlists.length">
-        <ul id="results-list" class="list-group">
-            <li ng-repeat="playlist in playlists"class="list-group-item">{{playlist.name}}
-                <button class="btn btn-primary" ng-click="searchPlaylist(playlist.tracks.href)">Save Show</button>
-            </li>
-        </ul>
+    <button ng-click="searchRecentlyPlayed()" class="btn btn-default spotify-btn">Search Recently Played</button>
+    <button ng-show="!playlists" ng-click="getPlaylists()" class="btn btn-default spotify-btn">Show Playlists</button>
+    <button ng-show="playlists" ng-click="getPlaylistsFromSpotify()" class="btn btn-default spotify-btn">Refresh Playlists</button>
+    <div id="playlists" ng-if="playlists.length">
+        <div ng-repeat="playlist in playlists" class="col-sm-12 col-md-6 col-lg-4 playlist" ng-click="searchPlaylist(playlist.tracks.href)">
+                <img class="playlist-image" ng-src="{{playlist.images[0].url}}" alt="playlist-image">
+        </div>
     </div>
 
     <div ng-if="concerts.length" id="results">
@@ -30,5 +29,18 @@
                 <button class="btn btn-primary" ng-click="saveConcert(concert)">Save Show</button>
             </li>
         </ul>
+    </div>
+
+    <div id="spotifyResults" ng-if="spotifySearch">
+        <accordion close-others="true">
+            <accordion-group heading="{{artist.name}}" is-open="false" ng-repeat="artist in artistsConcerts">
+                content
+                <!-- <ul id="results-list" class="list-group">
+                    <li ng-repeat="concert in artist.concerts" class="list-group-item">{{concert.displayName}} | {{concert.venue.displayName}} | {{concert.start.date}}
+                    <button class="btn btn-primary" ng-click="saveConcert(concert)">Save Show</button>
+                    </li>
+                </ul> -->
+            </accordion-group>
+        </accordion>
     </div>
 </div>

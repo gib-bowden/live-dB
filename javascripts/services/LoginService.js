@@ -8,11 +8,11 @@ app.service("LoginService", function(FIREBASE_CONFIG, $q){
             .then((data) => {
                 signInFirebaseUser(email, password)
                 .then((data) => {
-                    resolve(data.uid)
+                    resolve(data.uid);
                 })
                 .catch((err) => {
                     reject(err);
-                })
+                });
             })
             .catch(function(error) {
                 if (error.code === "auth/email-already-in-use") {
@@ -21,13 +21,13 @@ app.service("LoginService", function(FIREBASE_CONFIG, $q){
                     .catch((error) => {reject(error);});
                 }
             });
-        })
+        });
        
     };
 
     const signInFirebaseUser = (email, password) => {
         return firebase.auth().signInWithEmailAndPassword(email, password);
-    }
+    };
 
     return { addFirebaseUser, signInFirebaseUser };
 });

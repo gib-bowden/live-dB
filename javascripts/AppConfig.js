@@ -67,7 +67,7 @@ app.config(function($routeProvider, $locationProvider){
         .when("/attended", {
             templateUrl: 'partials/attended.html',
             controller: 'AttendedCtrl'
-        })
+        });
 
         // $locationProvider.html5Mode({
         //     enabled: false,

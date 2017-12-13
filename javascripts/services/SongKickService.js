@@ -21,7 +21,7 @@ app.service("SongKickService", function($http, $q, moment, SONGKICK_KEY){
             let endDateFilter = (endDate) ? `&max_date=${moment(endDate).format('YYYY[-]MM[-]DD')}` : ""; 
             return $q((resolve, reject) => {
                 $http.get(`https://api.songkick.com/api/3.0/artists/${artistId}/calendar.json?apikey=${SONGKICK_KEY}${startDateFilter}${endDateFilter}${pageNumberFilter}`).then((results) => {
-                let concerts = results.data.resultsPage.results.event
+                let concerts = results.data.resultsPage.results.event;
                 if (concerts) {
                     concerts.forEach((concert) => {
                         concert.queriedArtistId = artistId; 
@@ -63,7 +63,7 @@ app.service("SongKickService", function($http, $q, moment, SONGKICK_KEY){
                 reject(error); 
             });
         });        
-    } 
+    };
 
 
 
