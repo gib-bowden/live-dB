@@ -22,7 +22,19 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
     };
 
     const getSpotifyPlaylists = () => {
-        return $http.get(`https://mighty-shelf-28254.herokuapp.com/userPlaylist?user=${getCurrentSpotifyId()}`); 
+        return $http.get(`https://mighty-shelf-28254.herokuapp.com/playlists?user=${getCurrentSpotifyId()}`); 
+    };
+
+    // const getSpotifyPlaylists = () => {
+    //     return $http.get(`https://mighty-shelf-28254.herokuapp.com/playlists`); 
+    // };
+
+    const getRecentlyPlayed = () => {
+        return $http.get(`https://mighty-shelf-28254.herokuapp.com/recentlyPlayed`); 
+    };
+
+    const getPlaylistTracks = (playlistUrl) => {
+        return $http.get(`https://mighty-shelf-28254.herokuapp.com/playlistTracks?playlist=${encodeURIComponent(playlistUrl)}`); 
     };
 
     firebase.database().ref('userDetails/').on("child_changed" || "child_added", function(snapshot) {
@@ -32,6 +44,7 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
             console.log(spotifyUserId);
             const userData = snapshot.val();
             localStorage.setItem('spotifyUserId', spotifyUserId);
+            //localStorage.setItem('spotifyAccessToken', spotifyAccessToken);
             LoginService.addFirebaseUser(userData.email, userData.spotifyId).then((uid) => {
                 console.log(uid);
                 $rootScope.uid = uid; 
@@ -43,5 +56,5 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
         console.log("The read failed: " + errorObject.code);
       });
     
-    return { authenticateUser, getSpotifyPlaylists, getCurrentSpotifyId };
+    return { authenticateUser, getSpotifyPlaylists, getCurrentSpotifyId, getRecentlyPlayed, getPlaylistTracks};
 });
