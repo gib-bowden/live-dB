@@ -5,7 +5,7 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
 
     const getCurrentSpotifyId = () => {
         return localStorage.getItem('spotifyUserId');
-    }
+    };
 
     const authenticateUser = () => {
         localStorage.removeItem('spotifyUserId');
@@ -49,8 +49,8 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
                 console.log(uid);
                 $rootScope.uid = uid; 
                 firebase.database().ref('userDetails/' + spotifyUserId).update({'uid': uid});
-            })
-            $rootScope.$apply(() => {$location.path('/upcoming')});         
+            });
+            $rootScope.$apply(() => {$location.path('/upcoming');});         
         }
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
