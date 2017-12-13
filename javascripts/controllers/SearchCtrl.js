@@ -46,7 +46,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         return localizedConcerts;
     }; 
 
-
     const getUsMetroConcerts = (cityQuery, startDate, endDate, pageNumber) => {
         SongKickService.getBestMetroResult(cityQuery, 'US').then((result) => {
             return SongKickService.getConcertsByMetroId(result.metroArea.id, startDate, endDate, pageNumber);
@@ -110,7 +109,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
     const clearPlaylists = () => {
         $scope.playlists = null;
     }; 
-
 
     $scope.search = (queryObject, pageNumber) => {
         clearSearchResults(); 

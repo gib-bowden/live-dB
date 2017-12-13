@@ -32,15 +32,15 @@
     </div>
 
     <div id="spotifyResults" ng-if="spotifySearch">
-        <accordion close-others="true">
-            <accordion-group heading="{{artist.name}}" is-open="false" ng-repeat="artist in artistsConcerts">
-                content
-                <!-- <ul id="results-list" class="list-group">
+        <uib-accordion close-others="true">
+            <div uib-accordion-group class="panel-default" heading="{{artist.name}}" ng-repeat="artist in artistsConcerts">
+                <ul id="results-list" class="list-group">
                     <li ng-repeat="concert in artist.concerts" class="list-group-item">{{concert.displayName}} | {{concert.venue.displayName}} | {{concert.start.date}}
-                    <button class="btn btn-primary" ng-click="saveConcert(concert)">Save Show</button>
+                        <button class="btn btn-primary" ng-click="saveConcert(concert)">Save Show</button>
                     </li>
-                </ul> -->
-            </accordion-group>
-        </accordion>
+                </ul>
+            </div>
+        </uib-accordion>
     </div>
 </div>
+
