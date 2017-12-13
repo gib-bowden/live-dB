@@ -101,6 +101,21 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         return uniqueArtist; 
     };
 
+    const getSavedConcertIds = () => {
+        $scope.savedConcertIds = [];
+        DatabaseService.getConcerts($rootScope.uid).then((results) => {
+            results.forEach((result) => {
+                let object = {}
+                object.concertId = result.concertId;
+                object.id = result.id
+                $scope.savedConcertIds.push(object);
+            })
+        })
+        console.log("saved concert ids", $scope.savedConcertIds);
+    };
+
+    getSavedConcertIds(); 
+
     const clearScope = () => {
         $scope.artistConcerts = null;
         $scope.concerts = null;
@@ -123,7 +138,9 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
     $scope.saveConcert = (concert) => {
         let savableConcert = buildSavableConcertObject(concert);
         DatabaseService.saveConcert(savableConcert).then((result) => {
-            console.log(result); 
+            console.log(result);
+            getSavedConcertIds();
+            isSavedConcert(concert.id)  
         }).catch((err) => {
             console.log(err); 
         });
@@ -180,5 +197,10 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         });
     };
 
+    $scope.isSavedConcert = (concertId) => {
+        $scope.savedConcertIds.forEach((concert) => {
+            $scope.savedConcert = (concert.concertId === concertId) ? true : false; 
+        });
+    };
 
 }); 
