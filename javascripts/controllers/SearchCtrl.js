@@ -138,9 +138,9 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
     $scope.saveConcert = (concert) => {
         let savableConcert = buildSavableConcertObject(concert);
         DatabaseService.saveConcert(savableConcert).then((result) => {
-            console.log(result);
-            getSavedConcertIds();
-            isSavedConcert(concert.id)  
+            console.log("parentId",$scope.$parent.$id) 
+            console.log("Id",$scope.$id) 
+            console.log($scope.artistsConcerts); 
         }).catch((err) => {
             console.log(err); 
         });
@@ -197,10 +197,16 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         });
     };
 
-    $scope.isSavedConcert = (concertId) => {
+    $scope.isSavedConcert = (concertId, artistIndex, concertIndex) => {
         $scope.savedConcertIds.forEach((concert) => {
-            $scope.savedConcert = (concert.concertId === concertId) ? true : false; 
+            if (concert.concertId === concertId) {
+                return $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = true; 
+            }
         });
     };
+
+    $scope.deleteSavedConcert = (concertId) => {
+        DatabaseService.deleteConcert(concertId);
+    } 
 
 }); 
