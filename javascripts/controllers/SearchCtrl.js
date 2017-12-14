@@ -107,7 +107,7 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             results.forEach((result) => {
                 let object = {}
                 object.concertId = result.concertId;
-                object.id = result.id
+                object.databaseId = result.id
                 $scope.savedConcertIds.push(object);
             })
         })
@@ -135,12 +135,12 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         }
     }; 
 
-    $scope.saveConcert = (concert) => {
+    $scope.saveConcert = (artistIndex, concertIndex, concert) => {
         let savableConcert = buildSavableConcertObject(concert);
-        DatabaseService.saveConcert(savableConcert).then((result) => {
-            console.log("parentId",$scope.$parent.$id) 
-            console.log("Id",$scope.$id) 
-            console.log($scope.artistsConcerts); 
+        DatabaseService.saveConcert(savableConcert).then((result) => { 
+            getSavedConcertIds(); 
+            $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = true;
+            console.log($scope.savedConcertIds); 
         }).catch((err) => {
             console.log(err); 
         });
@@ -200,13 +200,16 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
     $scope.isSavedConcert = (concertId, artistIndex, concertIndex) => {
         $scope.savedConcertIds.forEach((concert) => {
             if (concert.concertId === concertId) {
-                return $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = true; 
+                $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = true;
+                $scope.artistsConcerts[artistIndex].concerts[concertIndex].databaseId = concert.databaseId; 
             }
         });
     };
 
-    $scope.deleteSavedConcert = (concertId) => {
+    $scope.deleteSavedConcert = (artistIndex, concertIndex, concertId) => {
         DatabaseService.deleteConcert(concertId);
+        getSavedConcertIds(); 
+        $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = false;
     } 
 
 }); 

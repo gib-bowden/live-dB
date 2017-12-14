@@ -61,8 +61,8 @@
                         <div class="col-xs-2">{{concert.location.city}}</div>
                         <div class="col-xs-2">{{concert.start.date}}</div>
                         <div class="col-xs-2">
-                            <button ng-show="!concert.saved" class="btn btn-primary" ng-click="saveConcert(concert)">Save Show</button>
-                            <button ng-show="concert.saved" class="btn btn-primary" ng-click="deleteSavedConcert(concert.databaseId)">Remove Show</button>
+                            <button ng-show="!concert.saved" class="btn btn-primary" ng-click="saveConcert($parent.$index, $index, concert)">Save Show</button>
+                            <button ng-show="concert.saved" class="btn btn-primary" ng-click="deleteSavedConcert($parent.$index, $index, concert.databaseId)">Remove Show</button>
                         </div>
                     </li>
                 </ul>
