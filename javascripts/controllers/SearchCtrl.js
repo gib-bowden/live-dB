@@ -51,7 +51,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         SongKickService.getBestMetroResult(cityQuery, 'US').then((result) => {
             return SongKickService.getConcertsByMetroId(result.metroArea.id, startDate, endDate, pageNumber);
         }).then((results) => {
-            console.log("getUsMetroResults", results);
             $scope.concerts = results;
         }).catch((err) => {
             console.log("getUsMetroResults error", err); 
@@ -111,7 +110,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
                 $scope.savedConcertIds.push(object);
             })
         })
-        console.log("saved concert ids", $scope.savedConcertIds);
     };
 
     getSavedConcertIds(); 
@@ -139,8 +137,8 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         let savableConcert = buildSavableConcertObject(concert);
         DatabaseService.saveConcert(savableConcert).then((result) => { 
             getSavedConcertIds(); 
+            $scope.artistsConcerts[artistIndex].concerts[concertIndex].databaseId = result.data.name; 
             $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = true;
-            console.log($scope.savedConcertIds); 
         }).catch((err) => {
             console.log(err); 
         });
@@ -157,7 +155,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
 
     $scope.getPlaylistsFromSpotify = () => {
         SpotifyService.getSpotifyPlaylists().then((results) => {
-            console.log(results.data.items);
             localStorage.setItem("playlists", JSON.stringify(results.data.items));
             $scope.playlists = results.data.items;
             $scope.isSpotifySearch = true; 
@@ -169,7 +166,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         $scope.spotifySearch = true; 
         SpotifyService.getRecentlyPlayed().then((results) => {
             let tracks = results.data.items;
-            console.log(tracks);
             let uniqueArtist = getUniqueArtists(tracks); 
             uniqueArtist.forEach((artist) => {
                 if ($scope.query) {

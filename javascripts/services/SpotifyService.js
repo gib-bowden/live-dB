@@ -46,7 +46,6 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
             localStorage.setItem('spotifyUserId', spotifyUserId);
             //localStorage.setItem('spotifyAccessToken', spotifyAccessToken);
             LoginService.addFirebaseUser(userData.email, userData.spotifyId).then((uid) => {
-                console.log(uid);
                 $rootScope.uid = uid; 
                 firebase.database().ref('userDetails/' + spotifyUserId).update({'uid': uid});
             });

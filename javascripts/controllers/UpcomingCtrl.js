@@ -5,7 +5,6 @@ app.controller("UpcomingCtrl", function($location, $rootScope, $scope, moment, D
 
     const getUpcomingConcerts = () => {
         DatabaseService.getConcerts($rootScope.uid).then((results) => {
-            console.log(results);
             let upcomingConcerts = results.filter((concert) => {
                 return moment(concert.datetime) > moment(); 
             });
