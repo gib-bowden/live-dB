@@ -25,10 +25,6 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
         return $http.get(`https://mighty-shelf-28254.herokuapp.com/playlists?user=${getCurrentSpotifyId()}`); 
     };
 
-    // const getSpotifyPlaylists = () => {
-    //     return $http.get(`https://mighty-shelf-28254.herokuapp.com/playlists`); 
-    // };
-
     const getRecentlyPlayed = () => {
         return $http.get(`https://mighty-shelf-28254.herokuapp.com/recentlyPlayed`); 
     };
@@ -49,7 +45,7 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
                 $rootScope.uid = uid; 
                 firebase.database().ref('userDetails/' + spotifyUserId).update({'uid': uid});
             });
-            $rootScope.$apply(() => {$location.path('/upcoming');});         
+            $rootScope.$apply(() => {$location.path('/search');});         
         }
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);

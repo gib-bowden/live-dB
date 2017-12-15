@@ -50,27 +50,23 @@ app.config(function($routeProvider, $locationProvider){
         })
         .when("/home", {
             templateUrl: 'partials/home.html',
-            controller: 'HomeCtrl'
+            controller: 'HomeCtrl',
+            resolve: { isAuth }
         })
-        // .when("/", {
-        //     templateUrl: 'partials/redirect.html',
-        //     controller: 'RedirectCtrl'
-        // })
         .when("/search", {
             templateUrl: 'partials/search.html',
-            controller: 'SearchCtrl'
+            controller: 'SearchCtrl',
+            resolve: { isAuth }
         })
         .when("/upcoming", {
             templateUrl: 'partials/upcoming.html',
-            controller: 'UpcomingCtrl'
+            controller: 'UpcomingCtrl',
+            resolve: { isAuth }
         })
         .when("/attended", {
             templateUrl: 'partials/attended.html',
-            controller: 'AttendedCtrl'
-        });
-
-        // $locationProvider.html5Mode({
-        //     enabled: false,
-        //     requireBase: true
-        //   });
+            controller: 'AttendedCtrl',
+            resolve: { isAuth }
+        })
+        .otherwise("/search");
 }); 

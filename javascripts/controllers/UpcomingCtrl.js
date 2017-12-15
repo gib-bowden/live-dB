@@ -22,14 +22,5 @@ app.controller("UpcomingCtrl", function($location, $rootScope, $scope, moment, D
             getUpcomingConcerts(); 
         });
     };
-
-
-    $scope.toggleStatus = (concert) => {
-        let newStatus = (concert.status === "going") ? "maybe" : "going";
-        concert.status = newStatus;
-        delete concert.$$hashKey;
-        DatabaseService.updateConcert(concert); 
-    };
-
-
+    
 }); 
