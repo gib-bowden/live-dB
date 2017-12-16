@@ -80,7 +80,8 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             city: concert.venue.metroArea.displayName,
             state: (concert.venue.metroArea.state) ? concert.venue.metroArea.state.displayName : null, 
             country: concert.venue.metroArea.country.displayName,
-            venue: concert.venue.displayName,
+            venueName: concert.venue.displayName,
+            venueUri: concert.venue.uri,
             datetime: concert.start.datetime,
             rating: null,
             notes: null,
@@ -145,6 +146,14 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         });
     };
 
+    $scope.getPlaylistsFromSpotify = () => {
+        SpotifyService.getSpotifyPlaylists().then((results) => {
+            localStorage.setItem("playlists", JSON.stringify(results.data.items));
+            $scope.playlists = results.data.items;
+            $scope.isSpotifySearch = true; 
+        });
+    };
+
     $scope.getPlaylists = () => {
         clearScope(); 
         if (localStorage.getItem("playlists")) {
@@ -154,16 +163,7 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         }
     };
 
-    $scope.getPlaylists(); 
-
-    $scope.getPlaylistsFromSpotify = () => {
-        SpotifyService.getSpotifyPlaylists().then((results) => {
-            localStorage.setItem("playlists", JSON.stringify(results.data.items));
-            $scope.playlists = results.data.items;
-            $scope.isSpotifySearch = true; 
-        });
-    };
-    
+    $scope.getPlaylists();     
 
     $scope.searchRecentlyPlayed = () => {
         clearScope();
