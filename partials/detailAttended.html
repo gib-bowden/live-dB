@@ -1,0 +1,26 @@
+<div ng-controller="DetailCtrl" id="concert-detail" class="text-center">
+        <div class="modal-header">
+            <h3 class="modal-title text-capitalize"><a href={{concert.concertUri}}>{{concert.concertName}}</a></h3>
+        </div>
+        
+        <div class="modal-body row">
+            <h3>{{concert.artistName}}</h3>
+            <h3><a href={{concert.venueUri}}>{{concert.venueName}}</a></h3>
+            <p>{{concert.datetime | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</p>
+            <p>{{concert.city}}, {{concert.country}}</p>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <textarea ng-model="concert.notes" class="form-control" rows="3" placeholder="Notes"></textarea>
+                     </div>
+                </div>
+            </div>
+            <p>
+                <p>Rating: <star-rating-comp rating="concert.rating" size="'large'" num-of-stars="5" on-click="starChange($event, concert)"></star-rating-comp></p>
+            </p>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="cancel()">Close</button>
+                <button class="btn btn-primary" ng-click="save(concert)">Save</button>
+            </div>
+        </div>    
+    </div>

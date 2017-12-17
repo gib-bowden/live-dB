@@ -1,0 +1,16 @@
+<div ng-controller="DetailCtrl" id="concert-detail" class="text-center">
+    <div class="modal-header">
+        <h3 class="modal-title text-capitalize"><a href={{concert.concertUri}}>{{concert.concertName}}</a></h3>
+    </div>
+    
+    <div class="modal-body row">
+        <h3>{{concert.artistName}}</h3>
+        <h3><a href={{concert.venueUri}}>{{concert.venueName}}</a></h3>
+        <p>{{concert.datetime | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</p>
+        <p>{{concert.city}}, {{concert.country}}</p>
+        <label>Have tickets: <input class="form-check-input" type="checkbox" ng-click="updateTicketStatus(concert)" ng-model="concert.haveTix"></label>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="cancel()">Close</button>
+        </div>
+    </div>    
+</div>

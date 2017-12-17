@@ -11,12 +11,14 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             }            
         }).then((results) => {
             if (city && results) {
-                console.log("getArtistConcerts(filtered)", filterArtistConcertsByCity(city, results));
-                if ($scope.spotifySearch) {
-                    $scope.artistsConcerts.push(buildArtistConcertObject(artist, filterArtistConcertsByCity(city, results))); 
-                } else {
-                    $scope.concerts = filterArtistConcertsByCity(city, results);
-                }                
+                let cityResults = filterArtistConcertsByCity(city, results);
+                if (cityResults.length) {
+                    if ($scope.spotifySearch) {
+                        $scope.artistsConcerts.push(buildArtistConcertObject(artist, cityResults)); 
+                    } else {
+                        $scope.concerts = cityResults;
+                    }     
+                }           
             } else if (results) {
                 if ($scope.spotifySearch) {
                     $scope.artistsConcerts.push(buildArtistConcertObject(artist, results)); 
@@ -24,7 +26,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
                     $scope.concerts = results;
                 }                
             }
-            console.log("scope from artist search", $scope);
         }).catch((err)=> {
             console.log(err); 
         });
@@ -50,7 +51,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         SongKickService.getBestMetroResult(cityQuery, 'US').then((result) => {
             return SongKickService.getConcertsByMetroId(result.metroArea.id, startDate, endDate, pageNumber);
         }).then((results) => {
-            console.log("getUsMetroResults", results);
             $scope.concerts = results;
         }).catch((err) => {
             console.log("getUsMetroResults error", err); 
@@ -78,13 +78,14 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             artistName: ($scope.isArtistSearch) ? getQueriedArtist(concert).displayName : getHeadlinerForMetroQuery(concert).displayName, 
             artistId: ($scope.isArtistSearch) ? concert.queriedArtistId : getHeadlinerForMetroQuery(concert).id,
             city: concert.venue.metroArea.displayName,
-            state: concert.venue.metroArea.state.displayName,
-            venue: concert.venue.displayName,
+            state: (concert.venue.metroArea.state) ? concert.venue.metroArea.state.displayName : null, 
+            country: concert.venue.metroArea.country.displayName,
+            venueName: concert.venue.displayName,
+            venueUri: concert.venue.uri,
             datetime: concert.start.datetime,
             rating: null,
             notes: null,
             haveTix: null,
-            status: "going",
             concertUri: concert.uri,
             uid: $rootScope.uid
         };
@@ -100,19 +101,31 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         return uniqueArtist; 
     };
 
-    const clearSearchResults = () => {
-        $scope.artistList = null;
-        $scope.artistConcerts = null;
-        $scope.concerts = null;
+    const getSavedConcertIds = () => {
+        $scope.savedConcertIds = [];
+        DatabaseService.getConcerts($rootScope.uid).then((results) => {
+            results.forEach((result) => {
+                let object = {};
+                object.concertId = result.concertId;
+                object.databaseId = result.id;
+                $scope.savedConcertIds.push(object);
+            });
+        });
     };
 
-    const clearPlaylists = () => {
+    getSavedConcertIds(); 
+
+
+    const clearScope = () => {
+        $scope.artistConcerts = null;
+        $scope.concerts = null;
         $scope.playlists = null;
-    }; 
+        $scope.spotifySearch = null; 
+    };
+
 
     $scope.search = (queryObject, pageNumber) => {
-        clearSearchResults(); 
-        clearPlaylists();
+        clearScope(); 
         if (queryObject.artist) {
             $scope.isArtistSearch = true; 
             getArtistConcerts(queryObject.artist, queryObject.city, queryObject.startDate, queryObject.endDate, pageNumber);
@@ -122,16 +135,27 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         }
     }; 
 
-    $scope.saveConcert = (concert) => {
+    $scope.saveConcert = (artistIndex, concertIndex, concert) => {
         let savableConcert = buildSavableConcertObject(concert);
-        DatabaseService.saveConcert(savableConcert).then((result) => {
-            console.log(result); 
+        DatabaseService.saveConcert(savableConcert).then((result) => { 
+            getSavedConcertIds(); 
+            $scope.artistsConcerts[artistIndex].concerts[concertIndex].databaseId = result.data.name; 
+            $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = true;
         }).catch((err) => {
             console.log(err); 
         });
     };
 
+    $scope.getPlaylistsFromSpotify = () => {
+        SpotifyService.getSpotifyPlaylists().then((results) => {
+            localStorage.setItem("playlists", JSON.stringify(results.data.items));
+            $scope.playlists = results.data.items;
+            $scope.isSpotifySearch = true; 
+        });
+    };
+
     $scope.getPlaylists = () => {
+        clearScope(); 
         if (localStorage.getItem("playlists")) {
             $scope.playlists = JSON.parse(localStorage.getItem("playlists"));
         } else {
@@ -139,22 +163,13 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         }
     };
 
-    $scope.getPlaylistsFromSpotify = () => {
-        SpotifyService.getSpotifyPlaylists().then((results) => {
-            console.log(results.data.items);
-            localStorage.setItem("playlists", JSON.stringify(results.data.items));
-            $scope.playlists = results.data.items;
-            $scope.isSpotifySearch = true; 
-        });
-    };
-
+    $scope.getPlaylists();     
 
     $scope.searchRecentlyPlayed = () => {
+        clearScope();
         $scope.spotifySearch = true; 
-        clearPlaylists(); 
         SpotifyService.getRecentlyPlayed().then((results) => {
             let tracks = results.data.items;
-            console.log(tracks);
             let uniqueArtist = getUniqueArtists(tracks); 
             uniqueArtist.forEach((artist) => {
                 if ($scope.query) {
@@ -167,12 +182,11 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
     };
 
     $scope.searchPlaylist = (playlistUrl) => {
-        $scope.spotifySearch = true; 
         SpotifyService.getPlaylistTracks(playlistUrl).then((results) => {
             let tracks = results.data.items;
-            clearPlaylists(); 
-            console.log(tracks);
             let uniqueArtists = getUniqueArtists(tracks); 
+            clearScope();
+            $scope.spotifySearch = true; 
             uniqueArtists.forEach((artist) => {
                 if ($scope.query) {
                     getArtistConcerts(artist, $scope.query.city, $scope.query.startDate, $scope.query.endDate);
@@ -183,8 +197,19 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         });
     };
 
+    $scope.isSavedConcert = (concertId, artistIndex, concertIndex) => {
+        $scope.savedConcertIds.forEach((concert) => {
+            if (concert.concertId === concertId) {
+                $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = true;
+                $scope.artistsConcerts[artistIndex].concerts[concertIndex].databaseId = concert.databaseId; 
+            }
+        });
+    };
 
-
-
+    $scope.deleteSavedConcert = (artistIndex, concertIndex, concertId) => {
+        DatabaseService.deleteConcert(concertId);
+        getSavedConcertIds(); 
+        $scope.artistsConcerts[artistIndex].concerts[concertIndex].saved = false;
+    };
 
 }); 

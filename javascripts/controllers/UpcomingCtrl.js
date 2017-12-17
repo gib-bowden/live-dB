@@ -4,10 +4,10 @@
 app.controller("UpcomingCtrl", function($location, $rootScope, $scope, moment, DatabaseService){
 
     const getUpcomingConcerts = () => {
+        $scope.currentTime = moment(); 
         DatabaseService.getConcerts($rootScope.uid).then((results) => {
-            console.log(results);
             let upcomingConcerts = results.filter((concert) => {
-                return moment(concert.datetime) > moment(); 
+                return moment(concert.datetime) > $scope.currentTime; 
             });
             $scope.concerts = upcomingConcerts; 
         }).catch((err) => {
@@ -23,14 +23,5 @@ app.controller("UpcomingCtrl", function($location, $rootScope, $scope, moment, D
             getUpcomingConcerts(); 
         });
     };
-
-
-    $scope.toggleStatus = (concert) => {
-        let newStatus = (concert.status === "going") ? "maybe" : "going";
-        concert.status = newStatus;
-        delete concert.$$hashKey;
-        DatabaseService.updateConcert(concert); 
-    };
-
-
+    
 }); 
