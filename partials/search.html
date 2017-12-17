@@ -45,7 +45,7 @@
                     <a href={{concert.venue.uri}} target="_blank">{{concert.venue.displayName}}</a>    
                 </div>
                 <div class="col-xs-2">{{concert.location.city}}</div>
-                <div class="col-xs-2">{{concert.start.date}}</div>
+                <div class="col-xs-2">{{concert.start.datetime  | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</div>
                 <div class="col-xs-2">
                     <button class="btn btn-primary" ng-click="saveConcert(concert)">Save</button>
                 </div>
@@ -67,7 +67,7 @@
                             <a href={{concert.venue.uri}} target="_blank">{{concert.venue.displayName}}</a>    
                         </div>
                         <div class="col-xs-2">{{concert.location.city}}</div>
-                        <div class="col-xs-2">{{concert.start.date}}</div>
+                        <div class="col-xs-2">{{concert.start.datetime | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</div>
                         <div class="col-xs-2">
                             <button ng-show="!concert.saved" class="btn btn-primary" ng-click="saveConcert($parent.$index, $index, concert)">Save</button>
                             <button ng-show="concert.saved" class="btn btn-danger" ng-click="deleteSavedConcert($parent.$index, $index, concert.databaseId)">Remove</button>

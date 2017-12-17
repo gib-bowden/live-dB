@@ -6,7 +6,7 @@
     <div class="modal-body row">
         <h3>{{concert.artistName}}</h3>
         <h3><a href={{concert.venueUri}}>{{concert.venueName}}</a></h3>
-        <p>{{concert.datetime}}</p>
+        <p>{{concert.datetime | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</p>
         <p>{{concert.city}}, {{concert.country}}</p>
         <label>Have tickets: <input class="form-check-input" type="checkbox" ng-click="updateTicketStatus(concert)" ng-model="concert.haveTix"></label>
         <div class="modal-footer">
