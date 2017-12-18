@@ -40,7 +40,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
                 imageUrl: results.data.images[0].url,
                 spotifyLink:results.data.external_urls.spotify
             };
-            console.log(artistConcertObject);
             $scope.artistsConcerts.push(artistConcertObject);
         }).catch((err) => {
             console.log(err);
@@ -114,7 +113,6 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
                 t.name === artist.name
             ))
         );
-        console.log("unique artists", uniqueArtists); 
         return uniqueArtists; 
     };
 

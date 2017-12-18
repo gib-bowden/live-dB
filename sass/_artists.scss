@@ -1,6 +1,17 @@
 #spotifyResults {
+    .thumbnail {
+        border: none; 
 
-    .artist-image {
-        height: 200px; 
+        .artist-link {
+            height: 200px; 
+            border-radius: 50%;
+        }
+
+        .artist-image {
+            width: 300px; 
+            height: 300px; 
+            border-radius: 50%; 
+        }
     }
+
 }
