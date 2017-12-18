@@ -33,6 +33,10 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
         return $http.get(`https://mighty-shelf-28254.herokuapp.com/playlistTracks?playlist=${encodeURIComponent(playlistUrl)}`); 
     };
 
+    const getArtist = (artistUrl) => {
+        return $http.get(`https://mighty-shelf-28254.herokuapp.com/artist?artist=${encodeURIComponent(artistUrl)}`);
+    };
+
     firebase.database().ref('userDetails/').on("child_changed" || "child_added", function(snapshot) {
         if (snapshot.val() !== null && !getCurrentSpotifyId()) {
             closeSpotifyWindow();
@@ -51,5 +55,5 @@ app.service("SpotifyService", function($http, $window, $rootScope, $location, Lo
         console.log("The read failed: " + errorObject.code);
       });
     
-    return { authenticateUser, getSpotifyPlaylists, getCurrentSpotifyId, getRecentlyPlayed, getPlaylistTracks};
+    return { authenticateUser, getSpotifyPlaylists, getCurrentSpotifyId, getRecentlyPlayed, getPlaylistTracks, getArtist};
 });

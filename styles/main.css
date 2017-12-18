@@ -1,8 +1,15 @@
-#playlists .playlist .playlist-image {
-  height: 300px;
-  width: 300px;
-  margin-top: 5%;
-  cursor: pointer; }
+#playlists .playlist {
+  height: 350px;
+  width: 350px;
+  margin: 1.5%; }
+  #playlists .playlist .playlist-image {
+    height: inherit;
+    width: inherit;
+    margin: inherit;
+    cursor: pointer; }
+
+#spotifyResults .artist-image {
+  height: 200px; }
 
 #login img {
   height: 110px; }
