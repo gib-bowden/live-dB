@@ -1,8 +1,22 @@
-#playlists .playlist .playlist-image {
-  height: 300px;
-  width: 300px;
-  margin-top: 5%;
-  cursor: pointer; }
+#playlists .playlist {
+  height: 275px;
+  width: 275px;
+  margin: 1%; }
+  #playlists .playlist .playlist-image {
+    height: inherit;
+    width: inherit;
+    margin: inherit;
+    cursor: pointer; }
+
+#spotifyResults .thumbnail {
+  border: none; }
+  #spotifyResults .thumbnail .artist-link {
+    height: 200px;
+    border-radius: 50%; }
+  #spotifyResults .thumbnail .artist-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%; }
 
 #login img {
   height: 110px; }

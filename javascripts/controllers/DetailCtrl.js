@@ -26,7 +26,7 @@ app.controller("DetailCtrl", function($location, $rootScope, $scope, moment, Dat
     $scope.save = (concert) => {
         delete concert.$$hashKey;
         DatabaseService.updateConcert(concert).then(() => {
-            $scope.$dismiss('saved')
+            $scope.$dismiss('saved');
         }).catch((err) => {
             console.log(err);
         });

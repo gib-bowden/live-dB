@@ -37,7 +37,7 @@
 
     <div ng-if="concerts.length" id="results">
         <ul id="results-list" class="list-group">
-            <li ng-repeat="concert in concerts" class="list-group-item col-xs-12">
+            <li ng-repeat="concert in concerts" class="list-group-item col-xs-12" ng-init="isSavedConcert(concert.id, null, $index)" >
                 <div class="col-xs-3">
                     <a href={{concert.uri}} target="_blank">{{concert.displayName}}</a>                    
                 </div>
@@ -47,7 +47,8 @@
                 <div class="col-xs-2">{{concert.location.city}}</div>
                 <div class="col-xs-2">{{concert.start.datetime  | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</div>
                 <div class="col-xs-2">
-                    <button class="btn btn-primary" ng-click="saveConcert(concert)">Save</button>
+                    <button ng-show="!concert.saved" class="btn btn-primary" ng-click="saveConcert(null, $index, concert)">Save</button>
+                    <button ng-show="concert.saved" class="btn btn-danger" ng-click="deleteSavedConcert(null, $index, concert.databaseId)">Remove</button>
                 </div>
             </li>
         </ul>
@@ -55,27 +56,40 @@
 
     <!-- Spotify Search Results  -->
 
-    <div id="spotifyResults" ng-if="spotifySearch">
-        <uib-accordion close-others="true">
-            <div uib-accordion-group class="panel-default" heading="{{artist.name}}" ng-repeat="artist in artistsConcerts">
-                <ul id="results-list" class="list-group">
-                    <li ng-repeat="concert in artist.concerts" class="list-group-item col-xs-12" ng-init="isSavedConcert(concert.id, $parent.$index, $index)">
-                        <div class="col-xs-3">
-                            <a href={{concert.uri}} target="_blank">{{concert.displayName}}</a>    
+    <div id="spotifyResults" ng-if="isSpotifySearch">
+        <div>
+            <div class="thumbnail col-sm-12 col-md-12 col-lg-6" ng-repeat="artist in artistsConcerts">
+                <a class="artist-link" href={{artist.spotifyLink}} target="_blank"><img class="artist-image" ng-src="{{artist.imageUrl}}" alt="artist-image"></a>
+                <div class="caption">
+                    <uib-accordion close-others="true">
+                        <div uib-accordion-group class="panel-default">
+                            <uib-accordion-heading>
+                                <div>
+                                    <h4>{{artist.name}}</h4>
+                                </div>                    
+                            </uib-accordion-heading>
+                            <ul id="results-list" class="list-group">
+                                <li ng-repeat="concert in artist.concerts" class="list-group-item col-xs-12" ng-init="isSavedConcert(concert.id, $parent.$index, $index)">
+                                    <div class="col-xs-3">
+                                        <a href={{concert.uri}} target="_blank">{{concert.displayName}}</a>    
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <a href={{concert.venue.uri}} target="_blank">{{concert.venue.displayName}}</a>    
+                                    </div>
+                                    <div class="col-xs-2">{{concert.location.city}}</div>
+                                    <div class="col-xs-2">{{concert.start.datetime | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</div>
+                                    <div class="col-xs-2">
+                                        <button ng-show="!concert.saved" class="btn btn-primary" ng-click="saveConcert($parent.$index, $index, concert)">Save</button>
+                                        <button ng-show="concert.saved" class="btn btn-danger" ng-click="deleteSavedConcert($parent.$index, $index, concert.databaseId)">Remove</button>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="col-xs-3">
-                            <a href={{concert.venue.uri}} target="_blank">{{concert.venue.displayName}}</a>    
-                        </div>
-                        <div class="col-xs-2">{{concert.location.city}}</div>
-                        <div class="col-xs-2">{{concert.start.datetime | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</div>
-                        <div class="col-xs-2">
-                            <button ng-show="!concert.saved" class="btn btn-primary" ng-click="saveConcert($parent.$index, $index, concert)">Save</button>
-                            <button ng-show="concert.saved" class="btn btn-danger" ng-click="deleteSavedConcert($parent.$index, $index, concert.databaseId)">Remove</button>
-                        </div>
-                    </li>
-                </ul>
+                    </uib-accordion>
+                </div>
             </div>
-        </uib-accordion>
+        </div>
+        
     </div>
 </div>
 

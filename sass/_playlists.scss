@@ -1,11 +1,14 @@
 #playlists {
 
     .playlist {
+        height: 275px;
+        width: 275px;
+        margin: 1%;
 
         .playlist-image {
-            height: 300px;
-            width: 300px; 
-            margin-top: 5%;
+            height: inherit;
+            width: inherit;   
+            margin: inherit; 
             cursor: pointer;
         }
     }
