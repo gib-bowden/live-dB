@@ -13,14 +13,14 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             if (city && results) {
                 let cityResults = filterArtistConcertsByCity(city, results);
                 if (cityResults.length) {
-                    if ($scope.spotifySearch) {
+                    if ($scope.isSpotifySearch) {
                         buildArtistConcertObject(artist, cityResults, artistHref); 
                     } else {
                         $scope.concerts = cityResults;
                     }     
                 }           
             } else if (results) {
-                if ($scope.spotifySearch) {
+                if ($scope.isSpotifySearch) {
                     buildArtistConcertObject(artist, results, artistHref); 
                 } else {
                     $scope.concerts = results;
@@ -136,7 +136,7 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         $scope.artistConcerts = null;
         $scope.concerts = null;
         $scope.playlists = null;
-        $scope.spotifySearch = null; 
+        $scope.isSpotifySearch = null; 
     };
 
     const searchEachArtist = (uniqueArtistsArray) => {
@@ -213,7 +213,7 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
             let tracks = results.data.items;
             let uniqueArtists = getUniqueArtists(tracks);
             clearScope();
-            $scope.spotifySearch = true; 
+            $scope.isSpotifySearch = true; 
             searchEachArtist(uniqueArtists);              
         });
     };

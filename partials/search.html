@@ -56,7 +56,7 @@
 
     <!-- Spotify Search Results  -->
 
-    <div id="spotifyResults" ng-if="spotifySearch">
+    <div id="spotifyResults" ng-if="isSpotifySearch">
         <div>
             <div class="thumbnail col-sm-12 col-md-12 col-lg-6" ng-repeat="artist in artistsConcerts">
                 <a class="artist-link" href={{artist.spotifyLink}} target="_blank"><img class="artist-image" ng-src="{{artist.imageUrl}}" alt="artist-image"></a>
