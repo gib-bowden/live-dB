@@ -4,21 +4,43 @@ body {
 body {
   background-color: #0F1626; }
 
-h1 {
+h1, h2, h3, h4, h5 {
   color: #F5F5F5; }
 
 .navbar-default {
   background-color: #f5f5f5; }
 
+.title-row {
+  border-bottom: 1px solid #ff533d; }
+
+#playlists H1 {
+  text-align: left; }
+
+#playlists .title-row {
+  margin-left: 2%;
+  margin-right: 2%; }
+
+#playlists .spotify-btns {
+  padding-top: 4.75%;
+  text-align: right; }
+
 #playlists .playlist {
   height: 275px;
   width: 275px;
-  margin: 1%; }
+  margin: 1%;
+  margin-bottom: 7%; }
+  #playlists .playlist .playlist-info {
+    margin-top: 0;
+    text-align: right;
+    width: inherit; }
+    #playlists .playlist .playlist-info h3 {
+      margin-top: 10px; }
   #playlists .playlist .playlist-image {
     height: inherit;
     width: inherit;
     margin: inherit;
-    cursor: pointer; }
+    cursor: pointer;
+    margin-bottom: 0px; }
 
 #spotifyResults .thumbnail {
   border: none; }

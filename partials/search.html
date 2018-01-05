@@ -19,23 +19,26 @@
         <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
     </form>
 
-    <!-- Spotify Search Buttons  -->
 
-    <button ng-click="searchRecentlyPlayed()" class="btn btn-default spotify-btn">Search Recently Played</button>
-    <button ng-show="!playlists" ng-click="getPlaylists()" class="btn btn-default spotify-btn">Show Playlists</button>
-    <button ng-show="playlists" ng-click="getPlaylistsFromSpotify()" class="btn btn-default spotify-btn">Refresh Playlists</button>
 
-    <!-- Playlist Tiles  -->
+    <!-- Playlist  -->
 
     <div id="playlists" ng-if="playlists.length">
+        
+        <div class="row title-row">
+            <div class="col-sm-12 col-md-6"><h1>Spotify<br>Playlists</h1></div>            
+            <div class="col-sm-12 col-md-6 spotify-btns">
+                <button ng-click="searchRecentlyPlayed()" class="btn btn-default spotify-btn">Search Recently Played</button>
+                <button ng-show="!playlists" ng-click="getPlaylists()" class="btn btn-default spotify-btn">Show Playlists</button>
+                <button ng-show="playlists" ng-click="getPlaylistsFromSpotify()" class="btn btn-default spotify-btn">Refresh Playlists</button>
+            </div>
+        </div>
         <div ng-repeat="playlist in playlists" class="col-sm-12 col-md-6 col-lg-4 playlist" ng-click="searchPlaylist(playlist.tracks.href)">
-            <div class="tile-primary-content">
-                <img class="playlist-image" ng-src="{{playlist.images[0].url}}" alt="playlist-image">
+            <img class="playlist-image" ng-src="{{playlist.images[0].url}}" alt="playlist-image">
+            <div class="playlist-info">
+                <h4></a>{{playlist.name}}</h4>
             </div>
-            <div class="tile-secondary-content">
-                <h2>Playlist Type</h2>
-                <p>Playlist Name</p>
-            </div>
+            
         </div>
     </div>
 

@@ -181,7 +181,8 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         SpotifyService.getSpotifyPlaylists().then((results) => {
             localStorage.setItem("playlists", JSON.stringify(results.data.items));
             $scope.playlists = results.data.items;
-            $scope.isSpotifySearch = true; 
+            $scope.isSpotifySearch = true;
+            console.log($scope.playlists);
         });
     };
 
