@@ -243,4 +243,12 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
         });
     };
 
+    $scope.mouseOver = (event) => {
+        console.log(event); 
+    }; 
+
+    $scope.mouseLeave = (event) => {
+        console.log(event); 
+    }; 
+
 }); 

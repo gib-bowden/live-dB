@@ -29,7 +29,13 @@
 
     <div id="playlists" ng-if="playlists.length">
         <div ng-repeat="playlist in playlists" class="col-sm-12 col-md-6 col-lg-4 playlist" ng-click="searchPlaylist(playlist.tracks.href)">
+            <div class="tile-primary-content">
                 <img class="playlist-image" ng-src="{{playlist.images[0].url}}" alt="playlist-image">
+            </div>
+            <div class="tile-secondary-content">
+                <h2>Playlist Type</h2>
+                <p>Playlist Name</p>
+            </div>
         </div>
     </div>
 

@@ -1,14 +1,22 @@
 <div class="text-center" id="attended">         
         <div ng-if="concerts.length" id="results">
             <ul id="upcoming-list" class="list-group">
-                <li ng-repeat="concert in concerts"class="list-group-item col-xs-12">
+                <h1>Attended Concerts</h1>
+                <li class="list-group-item col-xs-12 row">
+                    <div class="col-xs-3">Artist</div>
+                    <div class="col-xs-3">Venue</div>
+                    <div class="col-xs-2">Date</div>
+                    <div class="col-xs-2">Rating</div>
+                    <div class="col-xs-2"></div>
+                </li>
+                <li ng-repeat="concert in concerts"class="list-group-item col-xs-12 row">
                     <div class="col-xs-3">{{concert.artistName}}</div>
-                    <div class="col-xs-3">{{concert.venue}}</div>
+                    <div class="col-xs-3">{{concert.venueName}}</div>
                     <div class="col-xs-2">{{concert.datetime  | amDateFormat:'MMMM Do YYYY'}}</div>
-                    <div ng-if="concert.rating" class="col-xs-2">{{concert.rating}}/5</div>
+                    <div class="col-xs-2">{{(concert.rating) ? concert.rating : "not rated"}}</div>
                     <div class="col-xs-2">
-                        <button class="btn btn-default btn-sm col-xs-3 col-sm-offset-1" class="btn btn-primary" ng-click="launchModal('partials/detailAttended.html','DetailCtrl')" ng-controller="ModalCtrl">Details</button>
-                        <button class="btn btn-danger btn-sm col-xs-3 col-sm-offset-1" ng-click="deleteConcert(concert)">Delete</button>
+                        <button class="btn btn-default btn-sm col-xs-3 col-sm-offset-1" class="btn btn-primary" ng-click="launchModal('partials/detailAttended.html','DetailCtrl')" ng-controller="ModalCtrl"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                        <button class="btn btn-danger btn-sm col-xs-3 col-sm-offset-1" ng-click="deleteConcert(concert)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </div>
                 </li>
             </ul>
