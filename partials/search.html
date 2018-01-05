@@ -1,35 +1,51 @@
     <!-- Search Form  -->
 
-<div class="text-center" id="search">            
-    <form name="searchForm" ng-submit="search(query)" novalidate>
+<div class="text-center" id="search">   
+    <div class="row title-row">
+        <div class="col-sm-12 col-md-6"><h1>Search</h1></div> 
+    </div>         
+    <form class="search-form" name="searchForm" ng-submit="search(query)" novalidate>
         <div class="form-group col-sm-6">
             <input ng-model="query.artist" ng-required="!query.city" type="input" class="form-control" id="inputArtist" aria-describedby="artist" placeholder="Search for an Artist">
         </div>            
         <div class="form-group col-sm-6">
             <input ng-model="query.city" ng-required="!query.artist" type="input" class="form-control" id="inputCity" aria-describedby="city" placeholder="Search for a City">
         </div> 
-        <div class="form-group col-sm-6">
-            <label for="inputStartDate">Start Date</label>
-            <input ng-model="query.startDate" type="date" class="form-control" id="inputStartDate" aria-describedby="phone" placeholder="Start Date">
-        </div>  
-        <div class="form-group col-sm-6">
-            <label for="inputEndDate">End Date</label>
-            <input ng-model="query.endDate" email type="date" class="form-control" id="inputEndDate" aria-describedby="email" placeholder="End Date">
+        <div class="date-row row">
+            <div class="form-group col-sm-3 start-date">
+                <label for="inputStartDate">Start Date</label>
+                <input ng-model="query.startDate" type="date" class="form-control" id="inputStartDate" aria-describedby="phone" placeholder="Start Date">
+            </div>  
+            <div class="form-group col-sm-3 end-date">
+                <label for="inputEndDate">End Date</label>
+                <input ng-model="query.endDate" email type="date" class="form-control" id="inputEndDate" aria-describedby="email" placeholder="End Date">
+            </div>
+            <div class="form-group col-sm-3 col-sm-offset-2 search-btn"> 
+            <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
+            </div>
         </div>
-        <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
     </form>
 
-    <!-- Spotify Search Buttons  -->
 
-    <button ng-click="searchRecentlyPlayed()" class="btn btn-default spotify-btn">Search Recently Played</button>
-    <button ng-show="!playlists" ng-click="getPlaylists()" class="btn btn-default spotify-btn">Show Playlists</button>
-    <button ng-show="playlists" ng-click="getPlaylistsFromSpotify()" class="btn btn-default spotify-btn">Refresh Playlists</button>
 
-    <!-- Playlist Tiles  -->
+    <!-- Playlist  -->
 
     <div id="playlists" ng-if="playlists.length">
+        
+        <div class="row title-row">
+            <div class="col-sm-12 col-md-6"><h1>Spotify<br>Playlists</h1></div>            
+            <div class="col-sm-12 col-md-6 spotify-btns">
+                <button ng-click="searchRecentlyPlayed()" class="btn btn-default spotify-btn">Search Recently Played</button>
+                <button ng-show="!playlists" ng-click="getPlaylists()" class="btn btn-default spotify-btn">Show Playlists</button>
+                <button ng-show="playlists" ng-click="getPlaylistsFromSpotify()" class="btn btn-default spotify-btn">Refresh Playlists</button>
+            </div>
+        </div>
         <div ng-repeat="playlist in playlists" class="col-sm-12 col-md-6 col-lg-4 playlist" ng-click="searchPlaylist(playlist.tracks.href)">
-                <img class="playlist-image" ng-src="{{playlist.images[0].url}}" alt="playlist-image">
+            <img class="playlist-image" ng-src="{{playlist.images[0].url}}" alt="playlist-image">
+            <div class="playlist-info">
+                <h4></a>{{playlist.name}}</h4>
+            </div>
+            
         </div>
     </div>
 

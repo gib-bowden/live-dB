@@ -1,12 +1,46 @@
+body {
+  font-family: 'Comfortaa', serif; }
+
+body {
+  background-color: #4d4d4d; }
+
+h1, h2, h3, h4, h5 {
+  color: #F5F5F5; }
+
+.navbar-default {
+  background-color: #f5f5f5; }
+
+.title-row {
+  border-bottom: 1px solid #ff533d; }
+
+#playlists H1 {
+  text-align: left; }
+
+#playlists .title-row {
+  margin-left: 2%;
+  margin-right: 2%; }
+
+#playlists .spotify-btns {
+  padding-top: 4.75%;
+  text-align: right; }
+
 #playlists .playlist {
   height: 275px;
   width: 275px;
-  margin: 1%; }
+  margin: 1%;
+  margin-bottom: 7%; }
+  #playlists .playlist .playlist-info {
+    margin-top: 0;
+    text-align: right;
+    width: inherit; }
+    #playlists .playlist .playlist-info h3 {
+      margin-top: 10px; }
   #playlists .playlist .playlist-image {
     height: inherit;
     width: inherit;
     margin: inherit;
-    cursor: pointer; }
+    cursor: pointer;
+    margin-bottom: 0px; }
 
 #spotifyResults .thumbnail {
   border: none; }
@@ -18,8 +52,32 @@
     height: 300px;
     border-radius: 50%; }
 
-#login img {
-  height: 110px; }
+#login {
+  margin-top: 12%; }
+  #login img {
+    height: 59px; }
 
 .modal-content .form-horizontal {
   margin-left: 25%; }
+
+#search h1 {
+  text-align: left; }
+
+#search .title-row {
+  margin-left: 2%;
+  margin-right: 2%; }
+
+#search .search-form {
+  margin: 1%; }
+
+#search .start-date {
+  margin-left: 1.25%; }
+
+#search .end-date {
+  margin-left: -1.25%; }
+
+#search .search-btn {
+  margin-top: 2.85%;
+  margin-left: 22.5%;
+  padding-right: 0;
+  text-align: right; }

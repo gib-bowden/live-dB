@@ -1,15 +1,42 @@
 #playlists {
 
-    .playlist {
-        height: 275px;
-        width: 275px;
-        margin: 1%;
+        H1 {
+            text-align: left;
+        }
 
-        .playlist-image {
-            height: inherit;
-            width: inherit;   
-            margin: inherit; 
-            cursor: pointer;
+        .title-row {
+            margin-left: 2%;
+            margin-right: 2%; 
+        }
+
+        .spotify-btns {
+            padding-top: 4.75%;
+            text-align: right;
+        }
+    
+        .playlist {
+            height: 275px;
+            width: 275px;
+            margin: 1%;
+            margin-bottom: 7%;
+        
+        .playlist-info {
+            margin-top: 0;
+            text-align: right;
+            width: inherit;
+            
+            h3 {
+                margin-top: 10px; 
+            }
+        }
+    
+            .playlist-image {
+                height: inherit;
+                width: inherit;   
+                margin: inherit; 
+                cursor: pointer;
+                margin-bottom: 0px; 
+            }
+            
         }
     }
-}
