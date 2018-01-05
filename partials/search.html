@@ -1,22 +1,29 @@
     <!-- Search Form  -->
 
-<div class="text-center" id="search">            
-    <form name="searchForm" ng-submit="search(query)" novalidate>
+<div class="text-center" id="search">   
+    <div class="row title-row">
+        <div class="col-sm-12 col-md-6"><h1>Search</h1></div> 
+    </div>         
+    <form class="search-form" name="searchForm" ng-submit="search(query)" novalidate>
         <div class="form-group col-sm-6">
             <input ng-model="query.artist" ng-required="!query.city" type="input" class="form-control" id="inputArtist" aria-describedby="artist" placeholder="Search for an Artist">
         </div>            
         <div class="form-group col-sm-6">
             <input ng-model="query.city" ng-required="!query.artist" type="input" class="form-control" id="inputCity" aria-describedby="city" placeholder="Search for a City">
         </div> 
-        <div class="form-group col-sm-6">
-            <label for="inputStartDate">Start Date</label>
-            <input ng-model="query.startDate" type="date" class="form-control" id="inputStartDate" aria-describedby="phone" placeholder="Start Date">
-        </div>  
-        <div class="form-group col-sm-6">
-            <label for="inputEndDate">End Date</label>
-            <input ng-model="query.endDate" email type="date" class="form-control" id="inputEndDate" aria-describedby="email" placeholder="End Date">
+        <div class="date-row row">
+            <div class="form-group col-sm-3 start-date">
+                <label for="inputStartDate">Start Date</label>
+                <input ng-model="query.startDate" type="date" class="form-control" id="inputStartDate" aria-describedby="phone" placeholder="Start Date">
+            </div>  
+            <div class="form-group col-sm-3 end-date">
+                <label for="inputEndDate">End Date</label>
+                <input ng-model="query.endDate" email type="date" class="form-control" id="inputEndDate" aria-describedby="email" placeholder="End Date">
+            </div>
+            <div class="form-group col-sm-3 col-sm-offset-2 search-btn"> 
+            <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
+            </div>
         </div>
-        <button ng-disabled="searchForm.$invalid" class="btn btn-primary save-btn">Search</button>
     </form>
 
 

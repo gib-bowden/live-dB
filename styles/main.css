@@ -2,7 +2,7 @@ body {
   font-family: 'Comfortaa', serif; }
 
 body {
-  background-color: #0F1626; }
+  background-color: #4d4d4d; }
 
 h1, h2, h3, h4, h5 {
   color: #F5F5F5; }
@@ -59,3 +59,25 @@ h1, h2, h3, h4, h5 {
 
 .modal-content .form-horizontal {
   margin-left: 25%; }
+
+#search h1 {
+  text-align: left; }
+
+#search .title-row {
+  margin-left: 2%;
+  margin-right: 2%; }
+
+#search .search-form {
+  margin: 1%; }
+
+#search .start-date {
+  margin-left: 1.25%; }
+
+#search .end-date {
+  margin-left: -1.25%; }
+
+#search .search-btn {
+  margin-top: 2.85%;
+  margin-left: 22.5%;
+  padding-right: 0;
+  text-align: right; }
