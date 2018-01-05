@@ -1,15 +1,21 @@
 body {
-    background-color: #4d4d4d;
+    //background-image: url("../images/tweed_@2X.png");
+    background-image: url("../images/grey_wash_wall_@2X.png");
+    background-attachment: fixed;
+    padding-top: 70px;
+
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, label {
     color: #F5F5F5;
 }
 
 .navbar-default {
-    background-color: #f5f5f5
+    background-color: #4d4d4d;
+    border: none;
+
 }
 
 .title-row {
-    border-bottom: 1px solid #ff533d
+    border-bottom: 3px solid #ff533d
 }

@@ -1,0 +1,34 @@
+.navbar {
+    border-bottom: none;
+
+    .navbar-container {
+        margin-left: 10%;
+        margin-right: 10%; 
+        
+    }
+
+    .navbar-header {
+        .navbar-brand {
+            color: #ff533d; 
+        }
+    }
+    
+    .navbar-options {
+        li {
+            a {
+                color: #f5f5f5; 
+            } 
+            
+            a:hover {
+                color: #ff533d; 
+            } 
+
+            a:focus {
+                color: #ff533d; 
+            } 
+        }     
+    }
+    
+}
+
+

@@ -52,6 +52,14 @@
     <!-- Manual Search Results  -->
 
     <div ng-if="concerts.length" id="results">
+        <div class="row title-row">
+            <div class="col-sm-12 col-md-6"><h1>{{searchParam}}<br>Concerts</h1></div>            
+            <div class="col-sm-12 col-md-6 spotify-btns">
+                <button ng-click="searchRecentlyPlayed()" class="btn btn-default spotify-btn">Search Recently Played</button>
+                <button ng-show="!playlists" ng-click="getPlaylists()" class="btn btn-default spotify-btn">Show Playlists</button>
+                <button ng-show="playlists" ng-click="getPlaylistsFromSpotify()" class="btn btn-default spotify-btn">Refresh Playlists</button>
+            </div>
+        </div>
         <ul id="results-list" class="list-group">
             <li ng-repeat="concert in concerts" class="list-group-item col-xs-12" ng-init="isSavedConcert(concert.id, null, $index)" >
                 <div class="col-xs-3">
@@ -73,6 +81,14 @@
     <!-- Spotify Search Results  -->
 
     <div id="spotifyResults" ng-if="isSpotifySearch">
+        <div class="row title-row">
+            <div class="col-sm-12 col-md-6"><h1>Playlist<br>Artists</h1></div>            
+            <div class="col-sm-12 col-md-6 spotify-btns">
+                <button ng-click="searchRecentlyPlayed()" class="btn btn-default spotify-btn">Search Recently Played</button>
+                <button ng-show="!playlists" ng-click="getPlaylists()" class="btn btn-default spotify-btn">Show Playlists</button>
+                <button ng-show="playlists" ng-click="getPlaylistsFromSpotify()" class="btn btn-default spotify-btn">Refresh Playlists</button>
+            </div>
+        </div>
         <div>
             <div class="thumbnail col-sm-12 col-md-12 col-lg-6" ng-repeat="artist in artistsConcerts">
                 <a class="artist-link" href={{artist.spotifyLink}} target="_blank"><img class="artist-image" ng-src="{{artist.imageUrl}}" alt="artist-image"></a>
