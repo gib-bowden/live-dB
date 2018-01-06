@@ -1,20 +1,20 @@
-<nav class="navbar navbar-default" ng-controller="NavCtrl">
-    <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl">
+    <div class="container-fluid navbar-container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Live Db</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Live Db</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <!-- Nav options that show when user is authenticated (has a UID) -->
-        <ul class="nav navbar-nav navbar-right" ng-show="uid">
+        <ul class="nav navbar-nav navbar-right navbar-options" ng-show="uid">
             <li><a ng-href="#!/upcoming">Upcoming</a></li>
             <li><a ng-href="#!/attended">Attended</a></li>
             <li><a ng-href="#!/search">Search</a></li>
@@ -22,7 +22,7 @@
         </ul>
 
         <!-- Nav options that show when user is NOT authenticated (no UID) -->
-        <ul class="nav navbar-nav navbar-right" ng-show="!uid">
+        <ul class="nav navbar-nav navbar-right navbar-options" ng-show="!uid">
             <li><a ng-href="#!/login">Login</a></li>
         </ul>
 

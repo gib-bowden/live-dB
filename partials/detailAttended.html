@@ -1,11 +1,11 @@
 <div ng-controller="DetailCtrl" id="concert-detail" class="text-center">
         <div class="modal-header">
-            <h3 class="modal-title text-capitalize"><a href={{concert.concertUri}}>{{concert.concertName}}</a></h3>
+            <h3 class="modal-title text-capitalize"><a href={{concert.concertUri}} target="_blank">{{concert.concertName}}</a></h3>
         </div>
         
         <div class="modal-body row">
             <h3>{{concert.artistName}}</h3>
-            <h3><a href={{concert.venueUri}}>{{concert.venueName}}</a></h3>
+            <h3><a href={{concert.venueUri}} target="_blank">{{concert.venueName}}</a></h3>
             <p>{{concert.datetime | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</p>
             <p>{{concert.city}}, {{concert.country}}</p>
             <div class="form-horizontal">

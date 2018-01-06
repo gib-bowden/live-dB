@@ -1,8 +1,10 @@
 <div class="text-center" id="attended">         
         <div ng-if="concerts.length" id="results">
-            <ul id="upcoming-list" class="list-group">
-                <h1>Attended Concerts</h1>
-                <li class="list-group-item col-xs-12 row">
+            <div class="row title-row">
+                <div class="col-sm-12 col-md-6"><h1>Attended<br>Concerts</h1></div> 
+            </div>
+            <ul id="upcoming-list" class="list-group management-grid">
+                <li class="list-group-item col-xs-12 row first-row">
                     <div class="col-xs-3">Artist</div>
                     <div class="col-xs-3">Venue</div>
                     <div class="col-xs-2">Date</div>
@@ -14,9 +16,9 @@
                     <div class="col-xs-3">{{concert.venueName}}</div>
                     <div class="col-xs-2">{{concert.datetime  | amDateFormat:'MMMM Do YYYY'}}</div>
                     <div class="col-xs-2">{{(concert.rating) ? concert.rating : "not rated"}}</div>
-                    <div class="col-xs-2">
-                        <button class="btn btn-default btn-sm col-xs-3 col-sm-offset-1" class="btn btn-primary" ng-click="launchModal('partials/detailAttended.html','DetailCtrl')" ng-controller="ModalCtrl"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
-                        <button class="btn btn-danger btn-sm col-xs-3 col-sm-offset-1" ng-click="deleteConcert(concert)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    <div class="col-xs-2 action-column">
+                        <button class="btn btn-default" class="btn btn-primary" ng-click="launchModal('partials/detailAttended.html','DetailCtrl')" ng-controller="ModalCtrl"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                        <button class="btn btn-danger" ng-click="deleteConcert(concert)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </div>
                 </li>
             </ul>

@@ -153,9 +153,11 @@ app.controller("SearchCtrl", function($location, $rootScope, $scope, DatabaseSer
     $scope.search = (queryObject, pageNumber) => {
         clearScope(); 
         if (queryObject.artist) {
+            $scope.searchParam = queryObject.artist; 
             $scope.isArtistSearch = true; 
             getArtistConcerts(queryObject.artist, queryObject.city, queryObject.startDate, queryObject.endDate, pageNumber);
         } else {
+            $scope.searchParam = queryObject.city;
             $scope.isArtistSearch = false; 
             getUsMetroConcerts(queryObject.city, queryObject.startDate, queryObject.endDate, pageNumber);
         }

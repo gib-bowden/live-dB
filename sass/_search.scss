@@ -10,14 +10,19 @@
 
     .search-form {
         margin: 1%; 
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-bottom: 4%; 
     }
 
     .start-date {
         margin-left: 1.25%;
+        text-align: right;
     }
 
     .end-date {
         margin-left: -1.25%;
+        text-align: right;
     }
 
     .search-btn {
@@ -26,4 +31,14 @@
         padding-right: 0;
         text-align: right;
     }
+
+    .spotify-btns {
+        padding-top: 4.75%;
+        text-align: right;
+    }
+
+    a {
+        text-decoration: none; 
+    }
+
 }
