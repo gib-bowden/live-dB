@@ -15,3 +15,23 @@
         color: #f5f5f5;
     }
 }
+
+.management-grid {
+    margin-top: 2%; 
+    margin-left: 1%; 
+}
+
+#results-list {
+    margin-top: 1%;
+    margin-left: 3.5%;
+    margin-right: 3.5%;
+    text-align: left; 
+
+    .first-row {
+        margin-left: 0; 
+    }
+
+    .btn-column {
+        text-align: right; 
+    }
+}

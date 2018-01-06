@@ -83,6 +83,12 @@ h1, h2, h3, h4, h5, label {
 .modal-content .form-horizontal {
   margin-left: 25%; }
 
+.modal-content a {
+  text-decoration: none; }
+
+.modal-content h1, .modal-content h2, .modal-content h3, .modal-content h4, .modal-content h5, .modal-content label {
+  color: #333; }
+
 .navbar {
   border-bottom: none; }
   .navbar .navbar-container {
@@ -128,6 +134,9 @@ h1, h2, h3, h4, h5, label {
   padding-top: 4.75%;
   text-align: right; }
 
+#search a {
+  text-decoration: none; }
+
 .list-group-item {
   text-align: left; }
 
@@ -140,3 +149,23 @@ h1, h2, h3, h4, h5, label {
   border-color: #0f1626; }
   .first-row div {
     color: #f5f5f5; }
+
+.management-grid {
+  margin-top: 2%;
+  margin-left: 1%; }
+
+#results-list {
+  margin-top: 1%;
+  margin-left: 3.5%;
+  margin-right: 3.5%;
+  text-align: left; }
+  #results-list .first-row {
+    margin-left: 0; }
+  #results-list .btn-column {
+    text-align: right; }
+
+#upcoming h1 {
+  text-align: left; }
+
+#attended h1 {
+  text-align: left; }

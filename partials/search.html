@@ -61,6 +61,13 @@
             </div>
         </div>
         <ul id="results-list" class="list-group">
+            <li class="list-group-item col-xs-12 row first-row">
+                <div class="col-xs-3">Concert</div>
+                <div class="col-xs-3">Venue</div>
+                <div class="col-xs-2">Location</div>
+                <div class="col-xs-2">Date</div>
+                <div class="col-xs-2"></div>
+            </li>
             <li ng-repeat="concert in concerts" class="list-group-item col-xs-12" ng-init="isSavedConcert(concert.id, null, $index)" >
                 <div class="col-xs-3">
                     <a href={{concert.uri}} target="_blank">{{concert.displayName}}</a>                    
@@ -70,7 +77,7 @@
                 </div>
                 <div class="col-xs-2">{{concert.location.city}}</div>
                 <div class="col-xs-2">{{concert.start.datetime  | amDateFormat:'MMMM Do YYYY, hh:mm a'}}</div>
-                <div class="col-xs-2">
+                <div class="btn-column col-xs-2">
                     <button ng-show="!concert.saved" class="btn btn-primary" ng-click="saveConcert(null, $index, concert)">Save</button>
                     <button ng-show="concert.saved" class="btn btn-danger" ng-click="deleteSavedConcert(null, $index, concert.databaseId)">Remove</button>
                 </div>
